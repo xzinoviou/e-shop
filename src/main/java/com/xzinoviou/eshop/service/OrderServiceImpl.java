@@ -48,6 +48,8 @@ public class OrderServiceImpl implements OrderService {
   public Order create(OrderCreateDto orderCreateDto) {
 
     Order order = new Order();
+    order.setTotalPrice(BigDecimal.ZERO);
+    order.setTotalQuantity(0);
     order.setCreatedAt(LocalDateTime.now());
 
     User user;
@@ -60,9 +62,6 @@ public class OrderServiceImpl implements OrderService {
     }
 
     order.setUser(user);
-
-    int totalQuanity = 0;
-    BigDecimal totalPrice = BigDecimal.ZERO;
 
     //validate and set products
     for (OrderProductCreateDto item : orderCreateDto.getProducts()) {
@@ -78,17 +77,14 @@ public class OrderServiceImpl implements OrderService {
         order.addProduct(product, item.getQuantity());
         product.setStock(product.getStock() - item.getQuantity());
 
-        totalQuanity += item.getQuantity();
-        totalPrice = totalPrice.add(
-            product.getPrice().multiply(BigDecimal.valueOf(item.getQuantity())));
+        order.setTotalQuantity(order.getTotalQuantity() + item.getQuantity());
+        order.setTotalPrice(order.getTotalPrice()
+            .add(product.getPrice().multiply(BigDecimal.valueOf(item.getQuantity()))));
 
       } catch (RuntimeException ex) {
         throw new RuntimeException("Order creation failed - " + ex.getMessage());
       }
     }
-
-    order.setTotalPrice(totalPrice);
-    order.setTotalQuantity(totalQuanity);
 
     return orderRepository.save(order);
   }
@@ -105,9 +101,9 @@ public class OrderServiceImpl implements OrderService {
     List<OrderProduct> orderProducts = orderProductService.getAllByOrderId(id);
 
     for (OrderProduct orderProduct : orderProducts) {
+      orderProduct.getProduct().setStock(
+          orderProduct.getProduct().getStock() + orderProduct.getQuantity());
       order.removeProduct(orderProduct.getProduct());
-//      int currentStock = orderProduct.getProduct().getStock();
-//      orderProduct.getProduct().setStock(currentStock + orderProduct.getQuantity());
     }
 
     orderRepository.delete(order);
