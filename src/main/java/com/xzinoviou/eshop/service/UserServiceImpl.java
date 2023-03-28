@@ -5,6 +5,7 @@ import com.xzinoviou.eshop.model.Role;
 import com.xzinoviou.eshop.model.User;
 import com.xzinoviou.eshop.repository.UserRepository;
 import java.util.List;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 /**
@@ -15,8 +16,11 @@ public class UserServiceImpl implements UserService {
 
   private final UserRepository userRepository;
 
-  public UserServiceImpl(UserRepository userRepository) {
+  private final PasswordEncoder passwordEncoder;
+
+  public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
     this.userRepository = userRepository;
+    this.passwordEncoder = passwordEncoder;
   }
 
   @Override
@@ -26,18 +30,19 @@ public class UserServiceImpl implements UserService {
   }
 
   @Override
-  public User getByEmail(String email) {
-    return userRepository.findByEmail(email)
-        .orElseThrow(() -> new JpaException("User not found, with email: " + email));
+  public User getByUsername(String username) {
+    return userRepository.findByUsername(username)
+        .orElseThrow(() -> new JpaException("User not found, with username: " + username));
   }
 
   @Override
-  public List<User> getAllNyRole(Role role) {
+  public List<User> getAllByRole(Role role) {
     return userRepository.findByRole(role);
   }
 
   @Override
   public User create(User user) {
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     return userRepository.save(user);
   }
 

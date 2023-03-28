@@ -1,25 +1,22 @@
 package com.xzinoviou.eshop.dto.user;
 
+import com.xzinoviou.eshop.model.Role;
+
 /**
  * @author : Xenofon Zinoviou
  */
 public class UserCreateDto {
 
-  private String email;
 
   private String firstName;
 
   private String lastName;
 
+  private String username;
+
   private String password;
 
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
+  private Role role;
 
   public String getFirstName() {
     return firstName;
@@ -37,11 +34,28 @@ public class UserCreateDto {
     this.lastName = lastName;
   }
 
+
+  public String getUsername() {
+    return username;
+  }
+
+  public void setUsername(String username) {
+    this.username = username;
+  }
+
   public String getPassword() {
     return password;
   }
 
   public void setPassword(String password) {
     this.password = password;
+  }
+
+  public Role getRole() {
+    return role;
+  }
+
+  public void setRole(Role role) {
+    this.role = role;
   }
 }

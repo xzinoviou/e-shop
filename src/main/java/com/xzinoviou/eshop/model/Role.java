@@ -5,6 +5,6 @@ package com.xzinoviou.eshop.model;
  */
 public enum Role {
 
-  ADMIN, DEVELOPER, USER
+  ADMIN, MANAGER, USER
 
 }

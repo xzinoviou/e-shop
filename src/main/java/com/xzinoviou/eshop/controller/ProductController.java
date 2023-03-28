@@ -8,6 +8,7 @@ import com.xzinoviou.eshop.service.ProductService;
 import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContext;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,7 +28,8 @@ public class ProductController {
   private final ProductService productService;
   private final GenericMapper genericMapper;
 
-  public ProductController(ProductService productService, GenericMapper genericMapper) {
+  public ProductController(ProductService productService, GenericMapper genericMapper,
+      SecurityContext securityContext) {
     this.productService = productService;
     this.genericMapper = genericMapper;
   }

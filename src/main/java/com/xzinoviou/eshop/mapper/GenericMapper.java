@@ -10,7 +10,6 @@ import com.xzinoviou.eshop.dto.user.UserDto;
 import com.xzinoviou.eshop.model.Order;
 import com.xzinoviou.eshop.model.OrderProduct;
 import com.xzinoviou.eshop.model.Product;
-import com.xzinoviou.eshop.model.Role;
 import com.xzinoviou.eshop.model.User;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
@@ -47,7 +46,7 @@ public class GenericMapper {
   public UserDto mapToUserDto(User user) {
     UserDto dto = new UserDto();
     dto.setId(user.getId());
-    dto.setEmail(user.getEmail());
+    dto.setUsername(user.getUsername());
     dto.setPassword("*******");
     dto.setFirstName(user.getFirstName());
     dto.setLastName(user.getLastName());
@@ -57,10 +56,10 @@ public class GenericMapper {
 
   public User mapToUser(UserCreateDto dto) {
     User user = new User();
-    user.setEmail(dto.getEmail());
+    user.setUsername(dto.getUsername());
     user.setFirstName(dto.getFirstName());
     user.setLastName(dto.getLastName());
-    user.setRole(Role.USER);
+    user.setRole(dto.getRole());
     user.setPassword(dto.getPassword());
     return user;
   }

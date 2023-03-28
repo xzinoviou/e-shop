@@ -38,19 +38,19 @@ public class UserController {
     return ResponseEntity.ok(genericMapper.mapToUserDto(userService.getById(id)));
   }
 
-  @GetMapping("/{email}")
-  public ResponseEntity<UserDto> getByEmail(@PathVariable String email) {
+  @GetMapping("/{username}")
+  public ResponseEntity<UserDto> getByUsername(@PathVariable String username) {
     return ResponseEntity.ok(
-        genericMapper.mapToUserDto(userService.getByEmail(email)));
+        genericMapper.mapToUserDto(userService.getByUsername(username)));
   }
 
   @GetMapping
   public ResponseEntity<List<UserDto>> getAllUsers() {
     return ResponseEntity.ok(
-        userService.getAllNyRole(Role.USER).stream().map(genericMapper::mapToUserDto).toList());
+        userService.getAllByRole(Role.USER).stream().map(genericMapper::mapToUserDto).toList());
   }
 
-  @PostMapping
+  @PostMapping("/register")
   public ResponseEntity<UserDto> create(@RequestBody UserCreateDto userCreateDto) {
     User user = genericMapper.mapToUser(userCreateDto);
     return new ResponseEntity<>(
