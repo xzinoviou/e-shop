@@ -1,6 +1,7 @@
 package com.xzinoviou.eshop.service;
 
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.Header;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
@@ -68,6 +69,7 @@ public class JwtServiceImpl implements JwtService {
 
   private String createToken(Map<String, Object> claims, String subject) {
     return Jwts.builder()
+        .setHeaderParam(Header.TYPE, Header.JWT_TYPE)
         .setClaims(claims)
         .setSubject(subject)
         .setIssuer(env.getRequiredProperty("jwt.issuer"))
