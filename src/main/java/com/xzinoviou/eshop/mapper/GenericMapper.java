@@ -1,6 +1,5 @@
 package com.xzinoviou.eshop.mapper;
 
-import com.xzinoviou.eshop.dto.order.OrderCreateDto;
 import com.xzinoviou.eshop.dto.order.OrderDto;
 import com.xzinoviou.eshop.dto.order.OrderProductDto;
 import com.xzinoviou.eshop.dto.product.ProductCreateDto;
@@ -19,10 +18,6 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class GenericMapper {
-
-  public Order mapToOrder(OrderCreateDto orderCreateDto) {
-    return null;
-  }
 
   public Product mapToProduct(ProductCreateDto productCreateDto) {
     Product product = new Product();
