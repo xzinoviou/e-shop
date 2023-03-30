@@ -9,7 +9,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.math.BigDecimal;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -33,7 +33,7 @@ public class Product {
 
   @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,
       CascadeType.PERSIST}, orphanRemoval = true, mappedBy = "product")
-  private Set<OrderProduct> orders = new LinkedHashSet<>();
+  private Set<OrderProduct> orders = new HashSet<>();
 
   public Product() {
   }

@@ -14,8 +14,8 @@ import jakarta.persistence.Temporal;
 import jakarta.persistence.TemporalType;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -43,7 +43,7 @@ public class Order {
 
   @OneToMany(fetch = FetchType.LAZY, cascade = {CascadeType.MERGE,
       CascadeType.PERSIST}, orphanRemoval = true, mappedBy = "order")
-  private Set<OrderProduct> products = new LinkedHashSet<>();
+  private Set<OrderProduct> products = new HashSet<>();
 
   public Order() {
   }
