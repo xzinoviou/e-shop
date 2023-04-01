@@ -28,13 +28,13 @@ public class WebSecurityConfig {
 
   @Bean
   public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http
-        .csrf().disable()
+    http.cors().and().csrf().disable()
         .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
         .and()
         .authorizeHttpRequests()
         .requestMatchers("/users/register").permitAll()
         .requestMatchers("/authorize").permitAll()
+        .requestMatchers("/public").permitAll()
         .requestMatchers("/products", "/products/**").hasAnyRole("ADMIN", "MANAGER", "USER")
         .requestMatchers("/orders", "/orders/**").hasAnyRole("ADMIN", "MANAGER", "USER")
         .requestMatchers("/users/**").hasAnyRole("ADMIN");
