@@ -4,7 +4,9 @@ import com.xzinoviou.eshop.exception.JpaException;
 import com.xzinoviou.eshop.model.Role;
 import com.xzinoviou.eshop.model.User;
 import com.xzinoviou.eshop.repository.UserRepository;
+
 import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 /**
@@ -13,42 +15,45 @@ import org.springframework.stereotype.Service;
 @Service
 public class UserServiceImpl implements UserService {
 
-  private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-  public UserServiceImpl(UserRepository userRepository) {
-    this.userRepository = userRepository;
-  }
+    public UserServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
-  @Override
-  public User getById(Long id) {
-    return userRepository.findById(id)
-        .orElseThrow(() -> new JpaException("User not found, with id: " + id));
-  }
+    @Override
+    public User getById(Long id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new JpaException("User not found, with id: " + id));
+    }
 
-  @Override
-  public User getByUsername(String username) {
-    return userRepository.findByUsername(username)
-        .orElseThrow(() -> new JpaException("User not found, with username: " + username));
-  }
+    @Override
+    public User getByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new JpaException("User not found, with username: " + username));
+    }
 
-  @Override
-  public List<User> getAllByRole(Role role) {
-    return userRepository.findByRole(role);
-  }
+    @Override
+    public List<User> getAllByRole(Role role) {
+        if (role != null) {
+            return userRepository.findByRole(role);
+        } else
+            return userRepository.findAll();
+    }
 
-  @Override
-  public User create(User user) {
-    return userRepository.save(user);
-  }
+    @Override
+    public User create(User user) {
+        return userRepository.save(user);
+    }
 
-  @Override
-  public User update(User user) {
-    return userRepository.save(user);
-  }
+    @Override
+    public User update(User user) {
+        return userRepository.save(user);
+    }
 
-  @Override
-  public void delete(Long id) {
-    User user = getById(id);
-    userRepository.delete(user);
-  }
+    @Override
+    public void delete(Long id) {
+        User user = getById(id);
+        userRepository.delete(user);
+    }
 }
