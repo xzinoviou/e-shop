@@ -8,16 +8,16 @@ import java.util.Set;
 
 public class OrderCreateDto {
 
-  private Long userId;
+    private Long userId;
 
-  private Set<OrderProductCreateDto> products;
+    private Set<OrderProductCreateDto> products;
 
-  public Long getUserId() {
-    return userId;
-  }
+    public Long getUserId() {
+        return userId;
+    }
 
-  public Set<OrderProductCreateDto> getProducts() {
-    return products;
-  }
+    public Set<OrderProductCreateDto> getProducts() {
+        return products;
+    }
 
 }

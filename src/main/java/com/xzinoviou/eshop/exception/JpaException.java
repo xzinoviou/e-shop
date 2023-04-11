@@ -5,7 +5,7 @@ package com.xzinoviou.eshop.exception;
  */
 public class JpaException extends RuntimeException {
 
-  public JpaException(String message) {
-    super(message);
-  }
+    public JpaException(String message) {
+        super(message);
+    }
 }

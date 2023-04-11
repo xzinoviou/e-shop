@@ -5,15 +5,15 @@ package com.xzinoviou.eshop.dto.order;
  */
 public class OrderProductCreateDto {
 
-  private Long productId;
+    private Long productId;
 
-  private int quantity;
+    private int quantity;
 
-  public Long getProductId() {
-    return productId;
-  }
+    public Long getProductId() {
+        return productId;
+    }
 
-  public int getQuantity() {
-    return quantity;
-  }
+    public int getQuantity() {
+        return quantity;
+    }
 }

@@ -7,27 +7,27 @@ import java.math.BigDecimal;
  */
 public class ProductCreateDto {
 
-  private String title;
+    private String title;
 
-  private String photoUrl;
+    private String photoUrl;
 
-  private BigDecimal price;
+    private BigDecimal price;
 
-  private int stock;
+    private int stock;
 
-  public String getTitle() {
-    return title;
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  public String getPhotoUrl() {
-    return photoUrl;
-  }
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
 
-  public BigDecimal getPrice() {
-    return price;
-  }
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-  public int getStock() {
-    return stock;
-  }
+    public int getStock() {
+        return stock;
+    }
 }

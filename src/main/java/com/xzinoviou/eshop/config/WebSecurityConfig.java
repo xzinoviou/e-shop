@@ -23,39 +23,39 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 public class WebSecurityConfig {
 
-  @Autowired
-  private JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
 
-  @Bean
-  public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-    http.cors().and().csrf().disable()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-        .authorizeHttpRequests()
-        .requestMatchers("/users/register").permitAll()
-        .requestMatchers("/authorize").permitAll()
-        .requestMatchers("/public").permitAll()
-        .requestMatchers("/products", "/products/**").hasAnyRole("ADMIN", "MANAGER", "USER")
-        .requestMatchers("/orders", "/orders/**").hasAnyRole("ADMIN", "MANAGER", "USER")
-        .requestMatchers("/users/**").hasAnyRole("ADMIN");
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http.cors().and().csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .authorizeHttpRequests()
+                .requestMatchers("/users/register").permitAll()
+                .requestMatchers("/authorize").permitAll()
+                .requestMatchers("/public").permitAll()
+                .requestMatchers("/products", "/products/**").hasAnyRole("ADMIN", "MANAGER", "USER")
+                .requestMatchers("/orders", "/orders/**").hasAnyRole("ADMIN", "MANAGER", "USER")
+                .requestMatchers("/users/**").hasAnyRole("ADMIN");
 
-    http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-    return http.build();
-  }
+        http.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
 
-  @Bean
-  public PasswordEncoder passwordEncoder() {
-    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-  }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 
-  @Bean
-  public AuthenticationManager authenticationManager(
-      AuthenticationConfiguration authenticationConfiguration) throws Exception {
-    return authenticationConfiguration.getAuthenticationManager();
-  }
+    @Bean
+    public AuthenticationManager authenticationManager(
+            AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
 
-  @Bean
-  public SecurityContext securityContext() {
-    return SecurityContextHolder.getContext();
-  }
+    @Bean
+    public SecurityContext securityContext() {
+        return SecurityContextHolder.getContext();
+    }
 }

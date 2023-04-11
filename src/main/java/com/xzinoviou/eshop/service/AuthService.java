@@ -8,5 +8,5 @@ import com.xzinoviou.eshop.dto.jwt.JwtDto;
  */
 public interface AuthService {
 
-  JwtDto authorize(AuthRequestDto authRequestDto);
+    JwtDto authorize(AuthRequestDto authRequestDto);
 }

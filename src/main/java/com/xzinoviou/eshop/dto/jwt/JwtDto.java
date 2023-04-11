@@ -5,17 +5,17 @@ package com.xzinoviou.eshop.dto.jwt;
  */
 public class JwtDto {
 
-  private String jwtToken;
+    private String jwtToken;
 
-  public JwtDto() {
-  }
+    public JwtDto() {
+    }
 
-  public JwtDto(String jwtToken) {
-    this.jwtToken = jwtToken;
-  }
+    public JwtDto(String jwtToken) {
+        this.jwtToken = jwtToken;
+    }
 
-  public String getJwtToken() {
-    return jwtToken;
-  }
+    public String getJwtToken() {
+        return jwtToken;
+    }
 
 }

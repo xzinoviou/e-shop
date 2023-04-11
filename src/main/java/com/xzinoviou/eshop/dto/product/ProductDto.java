@@ -7,53 +7,53 @@ import java.math.BigDecimal;
  */
 public class ProductDto {
 
-  private Long id;
+    private Long id;
 
-  private String title;
+    private String title;
 
-  private String photoUrl;
+    private String photoUrl;
 
-  private BigDecimal price;
+    private BigDecimal price;
 
-  private int stock;
+    private int stock;
 
-  public Long getId() {
-    return id;
-  }
+    public Long getId() {
+        return id;
+    }
 
-  public void setId(Long id) {
-    this.id = id;
-  }
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-  public String getTitle() {
-    return title;
-  }
+    public String getTitle() {
+        return title;
+    }
 
-  public void setTitle(String title) {
-    this.title = title;
-  }
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-  public String getPhotoUrl() {
-    return photoUrl;
-  }
+    public String getPhotoUrl() {
+        return photoUrl;
+    }
 
-  public void setPhotoUrl(String photoUrl) {
-    this.photoUrl = photoUrl;
-  }
+    public void setPhotoUrl(String photoUrl) {
+        this.photoUrl = photoUrl;
+    }
 
-  public BigDecimal getPrice() {
-    return price;
-  }
+    public BigDecimal getPrice() {
+        return price;
+    }
 
-  public void setPrice(BigDecimal price) {
-    this.price = price;
-  }
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
-  public int getStock() {
-    return stock;
-  }
+    public int getStock() {
+        return stock;
+    }
 
-  public void setStock(int stock) {
-    this.stock = stock;
-  }
+    public void setStock(int stock) {
+        this.stock = stock;
+    }
 }

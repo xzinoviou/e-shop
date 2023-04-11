@@ -1,6 +1,7 @@
 package com.xzinoviou.eshop.service;
 
 import com.xzinoviou.eshop.model.OrderProduct;
+
 import java.util.List;
 
 /**
@@ -8,5 +9,5 @@ import java.util.List;
  */
 public interface OrderProductService {
 
-  List<OrderProduct> getAllByOrderId(Long orderId);
+    List<OrderProduct> getAllByOrderId(Long orderId);
 }

@@ -5,7 +5,9 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+
 import java.io.IOException;
+
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -20,50 +22,50 @@ import org.springframework.web.filter.OncePerRequestFilter;
 @Component
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-  private final UserDetailsService userDetailsService;
+    private final UserDetailsService userDetailsService;
 
-  private final JwtService jwtService;
+    private final JwtService jwtService;
 
-  public static final String AUTHORIZATION = "Authorization";
+    public static final String AUTHORIZATION = "Authorization";
 
-  public static final String BEARER = "Bearer";
+    public static final String BEARER = "Bearer";
 
-  public static final String SPACE = " ";
+    public static final String SPACE = " ";
 
-  public JwtAuthenticationFilter(UserDetailsService userDetailsServiceImpl, JwtService jwtService) {
-    this.userDetailsService = userDetailsServiceImpl;
-    this.jwtService = jwtService;
-  }
-
-  @Override
-  protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
-
-    final String authorizationHeader = httpServletRequest.getHeader(AUTHORIZATION);
-
-    String username = null;
-    String token = null;
-
-    if (authorizationHeader != null && authorizationHeader.startsWith(BEARER)) {
-
-      token = authorizationHeader.split(SPACE)[1];
-      username = jwtService.extractUsername(token);
-
+    public JwtAuthenticationFilter(UserDetailsService userDetailsServiceImpl, JwtService jwtService) {
+        this.userDetailsService = userDetailsServiceImpl;
+        this.jwtService = jwtService;
     }
 
-    if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-      UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+    @Override
+    protected void doFilterInternal(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, FilterChain filterChain) throws ServletException, IOException {
 
-      if (jwtService.validateToken(token, userDetails)) {
+        final String authorizationHeader = httpServletRequest.getHeader(AUTHORIZATION);
 
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
-            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+        String username = null;
+        String token = null;
 
-        usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+        if (authorizationHeader != null && authorizationHeader.startsWith(BEARER)) {
 
-        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-      }
+            token = authorizationHeader.split(SPACE)[1];
+            username = jwtService.extractUsername(token);
+
+        }
+
+        if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+
+            if (jwtService.validateToken(token, userDetails)) {
+
+                UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                        new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+
+                usernamePasswordAuthenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(httpServletRequest));
+
+                SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+            }
+        }
+
+        filterChain.doFilter(httpServletRequest, httpServletResponse);
     }
-
-    filterChain.doFilter(httpServletRequest, httpServletResponse);
-  }
 }

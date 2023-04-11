@@ -1,6 +1,7 @@
 package com.xzinoviou.eshop.service;
 
 import com.xzinoviou.eshop.model.Product;
+
 import java.util.List;
 
 /**
@@ -8,13 +9,13 @@ import java.util.List;
  */
 public interface ProductService {
 
-  Product getById(Long id);
+    Product getById(Long id);
 
-  List<Product> getAll();
+    List<Product> getAll();
 
-  Product create(Product product);
+    Product create(Product product);
 
-  Product update(Product product);
+    Product update(Product product);
 
-  void delete(Long id);
+    void delete(Long id);
 }

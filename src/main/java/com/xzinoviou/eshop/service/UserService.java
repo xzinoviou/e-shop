@@ -2,6 +2,7 @@ package com.xzinoviou.eshop.service;
 
 import com.xzinoviou.eshop.model.Role;
 import com.xzinoviou.eshop.model.User;
+
 import java.util.List;
 
 /**
@@ -9,16 +10,18 @@ import java.util.List;
  */
 public interface UserService {
 
-  User getById(Long id);
+    User getById(Long id);
 
-  User getByUsername(String username);
+    User getByUsername(String username);
 
-  List<User> getAllByRole(Role role);
+    List<User> getAll();
 
-  User create(User user);
+    List<User> getAllByRole(Role role);
 
-  User update(User user);
+    User create(User user);
 
-  void delete(Long id);
+    User update(User user);
+
+    void delete(Long id);
 
 }

@@ -6,66 +6,67 @@ import com.xzinoviou.eshop.mapper.GenericMapper;
 import com.xzinoviou.eshop.model.Role;
 import com.xzinoviou.eshop.model.User;
 import com.xzinoviou.eshop.service.UserService;
-import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 /**
  * @author : Xenofon Zinoviou
  */
 @RestController
 @RequestMapping("/users")
+@CrossOrigin("http://localhost:3000")
 public class UserController {
 
-  private final UserService userService;
-  private final GenericMapper genericMapper;
+    private final UserService userService;
+    private final GenericMapper genericMapper;
 
-  public UserController(UserService userService, GenericMapper genericMapper) {
-    this.userService = userService;
-    this.genericMapper = genericMapper;
-  }
+    public UserController(UserService userService, GenericMapper genericMapper) {
+        this.userService = userService;
+        this.genericMapper = genericMapper;
+    }
 
-  @GetMapping("/id/{id}")
-  public ResponseEntity<UserDto> getById(@PathVariable Long id) {
-    return ResponseEntity.ok(genericMapper.mapToUserDto(userService.getById(id)));
-  }
+    @GetMapping("/id/{id}")
+    public ResponseEntity<UserDto> getById(@PathVariable Long id) {
+        return ResponseEntity.ok(genericMapper.mapToUserDto(userService.getById(id)));
+    }
 
-  @GetMapping("/{username}")
-  public ResponseEntity<UserDto> getByUsername(@PathVariable String username) {
-    return ResponseEntity.ok(
-        genericMapper.mapToUserDto(userService.getByUsername(username)));
-  }
+    @GetMapping("/{username}")
+    public ResponseEntity<UserDto> getByUsername(@PathVariable String username) {
+        return ResponseEntity.ok(
+                genericMapper.mapToUserDto(userService.getByUsername(username)));
+    }
 
-  @GetMapping
-  public ResponseEntity<List<UserDto>> getAllUsers() {
-    return ResponseEntity.ok(
-        userService.getAllByRole(Role.USER).stream().map(genericMapper::mapToUserDto).toList());
-  }
+    @GetMapping
+    public ResponseEntity<List<UserDto>> getAllUsersByRole() {
+        return ResponseEntity.ok(
+                userService.getAll().stream().map(genericMapper::mapToUserDto).toList());
+    }
 
-  @PostMapping("/register")
-  public ResponseEntity<UserDto> create(@RequestBody UserCreateDto userCreateDto) {
-    User user = genericMapper.mapToUser(userCreateDto);
-    return new ResponseEntity<>(
-        genericMapper.mapToUserDto(userService.create(user)), HttpStatus.CREATED);
-  }
+    @GetMapping("/role/{role}")
+    public ResponseEntity<List<UserDto>> getAllUsersByRole(@PathVariable Role role) {
+        return ResponseEntity.ok(
+                userService.getAllByRole(role).stream().map(genericMapper::mapToUserDto).toList());
+    }
 
-  @PutMapping
-  public ResponseEntity<UserDto> update(@RequestBody User user) {
-    return new ResponseEntity<>(genericMapper.mapToUserDto(userService.update(user)),
-        HttpStatus.OK);
-  }
+    @PostMapping("/register")
+    public ResponseEntity<UserDto> create(@RequestBody UserCreateDto userCreateDto) {
+        User user = genericMapper.mapToUser(userCreateDto);
+        return new ResponseEntity<>(
+                genericMapper.mapToUserDto(userService.create(user)), HttpStatus.CREATED);
+    }
 
-  @DeleteMapping("/{id}")
-  public ResponseEntity<Void> delete(@PathVariable Long id) {
-    userService.delete(id);
-    return ResponseEntity.noContent().build();
-  }
+    @PutMapping
+    public ResponseEntity<UserDto> update(@RequestBody User user) {
+        return new ResponseEntity<>(genericMapper.mapToUserDto(userService.update(user)),
+                HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
+        userService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }

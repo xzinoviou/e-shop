@@ -5,24 +5,24 @@ package com.xzinoviou.eshop.dto.auth;
  */
 public class AuthRequestDto {
 
-  private String username;
+    private String username;
 
-  private String password;
+    private String password;
 
-  public AuthRequestDto() {
-  }
+    public AuthRequestDto() {
+    }
 
-  public AuthRequestDto(String username, String password) {
-    this.username = username;
-    this.password = password;
-  }
+    public AuthRequestDto(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 
-  public String getUsername() {
-    return username;
-  }
+    public String getUsername() {
+        return username;
+    }
 
-  public String getPassword() {
-    return password;
-  }
+    public String getPassword() {
+        return password;
+    }
 
 }

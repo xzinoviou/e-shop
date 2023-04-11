@@ -1,6 +1,7 @@
 package com.xzinoviou.eshop.dto.order;
 
 import com.xzinoviou.eshop.dto.product.ProductDto;
+
 import java.math.BigDecimal;
 
 /**
@@ -8,33 +9,33 @@ import java.math.BigDecimal;
  */
 public class OrderProductDto {
 
-  private ProductDto product;
+    private ProductDto product;
 
-  private int quantity;
+    private int quantity;
 
-  private BigDecimal subTotalPrice;
+    private BigDecimal subTotalPrice;
 
-  public ProductDto getProduct() {
-    return product;
-  }
+    public ProductDto getProduct() {
+        return product;
+    }
 
-  public void setProduct(ProductDto product) {
-    this.product = product;
-  }
+    public void setProduct(ProductDto product) {
+        this.product = product;
+    }
 
-  public int getQuantity() {
-    return quantity;
-  }
+    public int getQuantity() {
+        return quantity;
+    }
 
-  public void setQuantity(int quantity) {
-    this.quantity = quantity;
-  }
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
-  public BigDecimal getSubTotalPrice() {
-    return subTotalPrice;
-  }
+    public BigDecimal getSubTotalPrice() {
+        return subTotalPrice;
+    }
 
-  public void setSubTotalPrice(BigDecimal subTotalPrice) {
-    this.subTotalPrice = subTotalPrice;
-  }
+    public void setSubTotalPrice(BigDecimal subTotalPrice) {
+        this.subTotalPrice = subTotalPrice;
+    }
 }
